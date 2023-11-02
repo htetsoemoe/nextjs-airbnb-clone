@@ -2,6 +2,7 @@
 
 import Banner from "@components/Banner"
 import Header from "@components/Header"
+import LargeCard from "@components/LargeCard"
 import MediumCard from "@components/MediumCard"
 import SmallCard from "@components/SmallCard"
 import { useEffect, useState } from "react"
@@ -73,8 +74,15 @@ const Home = () => {
                                 title={item.title} />
                         ))}
                     </div>
-
                 </section>
+
+                {/* Large Card Section */}
+                <LargeCard
+                    img={"https://a0.muscache.com/im/pictures/2da67c1c-0c61-4629-8798-1d4de1ac9291.jpg?im_w=1440"}
+                    title={"The Greatest Outdoors"}
+                    description={"Wishlists curated by Airbnb"}
+                    buttonText={"Get Inspired"}
+                />
             </main>
         </div>
     )
