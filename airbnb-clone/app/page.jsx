@@ -2,11 +2,13 @@
 
 import Banner from "@components/Banner"
 import Header from "@components/Header"
+import MediumCard from "@components/MediumCard"
 import SmallCard from "@components/SmallCard"
 import { useEffect, useState } from "react"
 
 const Home = () => {
     const [exploreData, setExploreDate] = useState([]);
+    const [cardData, setCardData] = useState([]);
 
     // fetch all exploreData
     const fetchExploreData = async () => {
@@ -17,8 +19,18 @@ const Home = () => {
         setExploreDate(data)
     }
 
+    // fetch all medium cardData
+    const fetchCardData = async () => {
+        const response = await fetch('/api/cards');
+        const data = await response.json();
+
+        console.log(data);
+        setCardData(data);
+    }
+
     useEffect(() => {
         fetchExploreData();
+        fetchCardData();
     }, []);
 
     return (
@@ -27,7 +39,7 @@ const Home = () => {
             <Banner />
 
             <main className="max-w-7xl mx-auto px-8 sm:px-16">
-                <section className="pt-6">
+                <section className="pt-6 pb-3">
                     <h2 className="text-4xl font-semibold pb-5">
                         Explore Nearby
                     </h2>
@@ -46,6 +58,22 @@ const Home = () => {
                             />
                         ))}
                     </div>
+                </section>
+
+                {/* Card Data from a server - API Endpoint */}
+                <section className="pb-3">
+                    <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
+
+                    <div className="flex space-x-3 overflow-x-auto 
+                            scrollbar-hide p-3 -ml-3">
+                        {cardData?.map((item, index) => (
+                            <MediumCard
+                                key={index}
+                                img={item.img}
+                                title={item.title} />
+                        ))}
+                    </div>
+
                 </section>
             </main>
         </div>
